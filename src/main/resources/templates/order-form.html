@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pedido - Cafetería</title>
+</head>
+<body>
+<h1>Realizar Pedido</h1>
+
+<form th:action="@{/order/submit}" th:object="${orderConfig}" method="post">
+    <fieldset>
+        <legend>Datos del cliente</legend>
+        <label>Nombre:
+            <input type="text" th:field="*{nombreCliente}" required/>
+        </label>
+        <label>Mesa:
+            <input type="number" th:field="*{numeroMesa}" min="1" required/>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Café</legend>
+        <label>Cantidad:
+            <input type="number" th:field="*{cafeCantidad}" min="0" value="0"/>
+        </label>
+        <label>Tamaño:
+            <select th:field="*{cafeTamano}">
+                <option value="pequeno">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+            </select>
+        </label>
+        <label>Adicionales (número):
+            <input type="number" th:field="*{cafeAdicionales}" min="0" value="0"/>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Té</legend>
+        <label>Cantidad:
+            <input type="number" th:field="*{teCantidad}" min="0" value="0"/>
+        </label>
+        <label>Tamaño:
+            <select th:field="*{teTamano}">
+                <option value="pequeno">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+            </select>
+        </label>
+        <label>Adicionales (número):
+            <input type="number" th:field="*{teAdicionales}" min="0" value="0"/>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Postre</legend>
+        <label>Cantidad:
+            <input type="number" th:field="*{postreCantidad}" min="0" value="0"/>
+        </label>
+        <label>Tamaño:
+            <select th:field="*{postreTamano}">
+                <option value="pequeno">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+            </select>
+        </label>
+        <label>Adicionales (número):
+            <input type="number" th:field="*{postreAdicionales}" min="0" value="0"/>
+        </label>
+    </fieldset>
+
+    <button type="submit">Procesar Pedido</button>
+</form>
+
+</body>
+</html>
