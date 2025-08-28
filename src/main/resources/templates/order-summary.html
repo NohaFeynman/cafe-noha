@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Resumen del Pedido</title>
+</head>
+<body>
+<h1>Resumen del Pedido</h1>
+
+<div th:if="${resumen != null}">
+    <p><strong>Cliente:</strong> <span th:text="${resumen.nombreCliente}"></span></p>
+    <p><strong>Mesa:</strong> <span th:text="${resumen.numeroMesa}"></span></p>
+
+    <h3>Detalle</h3>
+    <ul>
+        <li>
+            <strong>Café:</strong>
+            Cantidad <span th:text="${resumen.cafeCantidad}"></span>,
+            Tamaño <span th:text="${resumen.cafeTamano}"></span>,
+            Adicionales <span th:text="${resumen.cafeAdicionales}"></span>,
+            Subtotal S/ <span th:text="${resumen.cafeSubtotal}"></span>
+        </li>
+        <li>
+            <strong>Té:</strong>
+            Cantidad <span th:text="${resumen.teCantidad}"></span>,
+            Tamaño <span th:text="${resumen.teTamano}"></span>,
+            Adicionales <span th:text="${resumen.teAdicionales}"></span>,
+            Subtotal S/ <span th:text="${resumen.teSubtotal}"></span>
+        </li>
+        <li>
+            <strong>Postre:</strong>
+            Cantidad <span th:text="${resumen.postreCantidad}"></span>,
+            Tamaño <span th:text="${resumen.postreTamano}"></span>,
+            Adicionales <span th:text="${resumen.postreAdicionales}"></span>,
+            Subtotal S/ <span th:text="${resumen.postreSubtotal}"></span>
+        </li>
+    </ul>
+
+    <h2>Total: S/ <span th:text="${resumen.total}"></span></h2>
+</div>
+
+<hr/>
+
+<h3>Califica tu experiencia</h3>
+<form th:action="@{/order/rate}" th:object="${ratingForm}" method="post">
+    <label>Estrellas:
+        <select th:field="*{estrellas}" required>
+            <option th:value="1">1</option>
+            <option th:value="2">2</option>
+            <option th:value="3">3</option>
+            <option th:value="4">4</option>
+            <option th:value="5">5</option>
+        </select>
+    </label>
+    <br/>
+    <label>Comentario (opcional):
+        <textarea th:field="*{comentario}" rows="3" cols="40"></textarea>
+    </label>
+    <br/>
+    <button type="submit">Enviar calificación</button>
+</form>
+
+<p th:if="${mensaje != null}" th:text="${mensaje}"></p>
+<p th:if="${comentario != null and #strings.isNotEmpty(comentario)}">
+    Comentario: <span th:text="${comentario}"></span>
+</p>
+
+<p><a th:href="@{/order}">Hacer otro pedido</a></p>
+</body>
+</html>
